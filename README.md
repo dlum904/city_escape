@@ -25,31 +25,31 @@ This project will include:
 # Implementation Timeline
 
 Day1
-Setup all necessary files.
-Create a backgroun canvas and setup boundaries.
-Create units and their animations.
+- Setup all necessary files.
+- Create a backgroun canvas and setup boundaries.
+- Create units and their animations.
 
 Day2
-Give player's unit inputs depending on key pressed
-Get units to move around on-screen
-Give enemy units an AI
-Collision
+- Give player's unit inputs depending on key pressed
+- Get units to move around on-screen
+- Give enemy units an AI
+- Collision
 
 Day3
-Collision cont..
-Game over logic
+- Collision cont..
+- Game over logic
 
 Day4
-Style everything.
-Make a title screen
+- Style everything.
+- Make a title screen
 
 Bonus
-Create different types of projectiles that move differently
-Give the player different powerups that affect the way their unit behaves
-Add extra characters to play as.
-Add a friendly unit the player must prevent from being hit by the enemy.
-Add a boss that does cool stuff.
-Leaderboard
-Snazzy music
+- Create different types of projectiles that move differently
+- Give the player different powerups that affect the way their unit behaves
+- Add extra characters to play as.
+- Add a friendly unit the player must prevent from being hit by the enemy.
+- Add a boss that does cool stuff.
+- Leaderboard
+- Snazzy music
 
 
