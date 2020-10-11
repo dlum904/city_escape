@@ -1,5 +1,5 @@
 # JavaScript Project Proposal: City Escape
-City escape is basically a top-down endless runner game.  Enemies will randomly spawn from the front or the rear.  The player must do their best to avoid or destroy enemies with a close range attack.  Obstacles will also appear in the players path.  There will be multiple enemies each with their own unique behavior.
+City escape is essentially a top-down endless runner game.  The player will control a unit that will be riding along a highway.  Enemies will randomly spawn from the front or the rear.  The player must do their best to avoid or destroy enemies with a close range attack.  Obstacles will also appear in the players path.  There will be multiple enemies each with their own unique behavior.
 
 This project will utilize:
 -   Vanilla JavaScript
