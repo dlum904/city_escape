@@ -21,6 +21,8 @@ This project will include:
     -   When the player's unit reaches a certain number of collisions, they will get a game over.
 -   Projectiles (bonus)
     -   Some enemy units will be able to shoot projectiles that move in different speeds and patterns, which will also have collision with the player's units.
+    -   Player's attacks can reflect projectiles???
+    -   Make things explode and bounce around on-screen???
 
 # Implementation Timeline
 
