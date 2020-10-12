@@ -24,6 +24,11 @@ This project will include:
     -   Player's attacks can reflect projectiles???
     -   Make things explode and bounce around on-screen???
 
+# Wireframe:
+
+<img src="./dist/images/wireframe.png" width="500"/>
+<img src="./dist/images/screenshot.png" width="500"/>
+
 # Implementation Timeline
 
 Day1
