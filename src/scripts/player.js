@@ -1,5 +1,5 @@
 export default class Player {
-    constructor(playerSprite) {
+    constructor() {
         this.x = 300,
         this.y = 200,
         this.width = 186;
@@ -9,8 +9,9 @@ export default class Player {
         this.speed = 10,
         this.moving = false,
         this.leftAttack = false,
-        this.rightAttack = false
-        this.playerSprite = playerSprite
+        this.rightAttack = false,
+        this.playerSprite = new Image();
+        this.playerSprite.src = "./src/images/bike1.png";
     }
 
     // movePlayer() {
