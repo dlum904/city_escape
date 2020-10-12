@@ -18,7 +18,7 @@ This project will include:
 -   Collision
     -   When the player's unit collides with another object, there will be a collision.
 -   Game Over logic
-    -   When the player's unit reaches a certain number of collisions, they will get a game over.
+    -   When the player's unit reaches 3 collisions, they will get a game over.
 -   Projectiles (bonus)
     -   Some enemy units will be able to shoot projectiles that move in different speeds and patterns, which will also have collision with the player's units.
     -   Player's attacks can reflect projectiles???
