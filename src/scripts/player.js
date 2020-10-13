@@ -1,18 +1,20 @@
 export default class Player {
     constructor() {
-        this.x = 300,
-        this.y = 200,
+        this.x = 300;
+        this.y = 200;
         this.width = 186;
-        this.height = 130,
-        this.frameX = 0,
-        this.frameY = 0,
-        this.speed = 10,
-        this.moving = false,
-        this.leftAttack = false,
-        this.rightAttack = false,
+        this.height = 130;
+        this.xHitBox = [this.x, this.x + this.width];
+        this.yHitBox = [this.y, this.y +this.height];
+        this.frameX = 0;
+        this.frameY = 0;
+        this.speed = 10;
+        this.moving = false;
+        this.leftAttack = false;
+        this.rightAttack = false;
         this.playerSprite = new Image();
         this.playerSprite.src = "./src/images/bike1.png";
-        this.keys = []
+        this.keys = [];
         this.registerEvents();
     }
 

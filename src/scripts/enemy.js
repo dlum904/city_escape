@@ -6,7 +6,6 @@ export default class Enemy {
         this.height = 480;
         this.hitboxWidth = 90;
         this.hitboxHeight = 150;
-        this.hitboxX = [this.x, this.x + this.hitboxWidth];
         this.type = enemyType // TODO Will change based on a the argument passed into constructor
         this.enemySprite = new Image();
         switch (this.type) {
@@ -21,7 +20,9 @@ export default class Enemy {
                 this.y = 650;
                 break;
             default:
-        }
+                }
+        this.xHitBox = [this.x, this.x + this.hitboxWidth];
+        this.yHitBox = [this.y, this.y + this.hitboxHeight];
     }
 
 }

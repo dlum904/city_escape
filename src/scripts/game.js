@@ -1,6 +1,6 @@
 import Enemy from "./enemy";
 import Player from "./player";
-
+const Util = require("./util");
 export default class Game {
     constructor(canvas) {
         this.ctx = canvas.getContext("2d");
@@ -13,6 +13,11 @@ export default class Game {
         this.background = new Image()
         this.background.src = "./src/images/background-1.png";
         this.enemies = []; // contains enemies currently on screen, shown as enemy.type
+        this.fpsInterval;
+        this.startTime;
+        this.now;
+        this.then;
+        this.elapsed;
 
     }
 
@@ -80,6 +85,8 @@ export default class Game {
                 90, 150
             );
             currentEnemy.y += 3;
+            Util.collision(this.player1.x + 67, this.player1.y, 60, this.player1.height,
+                currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight);
         }
         if (currentEnemy.y > this.height && currentEnemy.type ==="stupid") {
             this.enemies.splice(enemyNum, 1)
@@ -93,12 +100,14 @@ export default class Game {
                 90, 150
                 );
             currentEnemy.y -= 6;
-            if (this.player1.x > currentEnemy.x) {
-                currentEnemy.x += 2;
+            if (this.player1.x + 20  > currentEnemy.x) {
+                currentEnemy.x += 4;
             }
             else {
-                currentEnemy.x -= 2;
+                currentEnemy.x -= 4;
             }
+            Util.collision(this.player1.x + 67, this.player1.y, 60, this.player1.height,
+                currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight);
         }
         if (currentEnemy.y < -150 && currentEnemy.type === "crazy") {
             this.enemies.splice(enemyNum, 1)
@@ -109,6 +118,8 @@ export default class Game {
         this.ctx.clearRect(0, 0, this.width, this.height)
         this.drawBackground();
         if (this.enemies[0]) {
+            // Util.collision(this.player1.x + 67, this.player1.y, 60, this.player1.height,
+            //     this.enemies[0].x, this.enemies[0].y, this.enemies[0].hitboxWidth, this.enemies[0].hitboxHeight);
             this.drawEnemy(0);
         }
         if (this.enemies[1]) {
@@ -123,7 +134,6 @@ export default class Game {
         if (this.enemies[4]) {
             this.drawEnemy(4);
         }
-
         this.drawPlayer();
         this.player1.movePlayer();
         this.player1.handlePlayerFrame();
@@ -131,5 +141,41 @@ export default class Game {
         requestAnimationFrame(this.animate.bind(this));
     }
 
+    // startAnimating(fps) {
+    //     this.fpsInterval = 1000 / fps;
+    //     this.then = Date.now();
+    //     this.startTime = this.then;
+    //     this.animate();
+    // }
+    // animate() {
+    //     requestAnimationFrame(this.animate.bind(this));
+    //     this.now = Date.now();
+    //     this.elapsed = this.now - this.then;
+    //     if (this.elapsed > this.fpsInterval) {
+    //         this.then = this.now - (this.elapsed % this.fpsInterval);
+    //         this.ctx.clearRect(0, 0, this.width, this.height)
+    //         this.drawBackground();
+    //         if (this.enemies[0]) {
+    //             this.drawEnemy(0);
+    //         }
+    //         if (this.enemies[1]) {
+    //             this.drawEnemy(1);
+    //         }
+    //         if (this.enemies[2]) {
+    //             this.drawEnemy(2);
+    //         }
+    //         if (this.enemies[3]) {
+    //             this.drawEnemy(3);
+    //         }
+    //         if (this.enemies[4]) {
+    //             this.drawEnemy(4);
+    //         }
+    //         this.drawPlayer();
+    //         this.player1.movePlayer();
+    //         this.player1.handlePlayerFrame();
+    //         this.generateEnemy();
+    //         requestAnimationFrame(this.animate.bind(this));
+    //     }
+    // }
 }
 
