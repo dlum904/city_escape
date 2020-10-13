@@ -8,5 +8,9 @@
     transform: translate(-50%, -50%);
 }
 
+@font-face {
+    font-family: 'ARCADECLASSIC';
+    src: url("./images/ARCADECLASSIC.TTF");
+}
 
 /*# sourceMappingURL=main.css.map*/

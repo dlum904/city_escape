@@ -3,6 +3,8 @@ import Player from "./player";
 const Util = require("./util");
 export default class Game {
     constructor(canvas) {
+        this.health = 1000;
+        this.gameover = false;
         this.ctx = canvas.getContext("2d");
         this.player1 = new Player();
         this.width = canvas.width;
@@ -18,7 +20,6 @@ export default class Game {
         this.now;
         this.then;
         this.elapsed;
-
     }
 
     drawBackground() {
@@ -46,6 +47,46 @@ export default class Game {
             this.player1.width, this.player1.height, this.player1.x, this.player1.y,    // where the image will be animated on canvas
             this.player1.width, this.player1.height
         );
+    }
+
+    drawHealth(health) {
+        // initial health
+        this.ctx.fillStyle = "red"
+        this.ctx.fillRect(10, 30, 250, 10)
+
+        // your actual health
+        if (health < (700)) {
+            this.ctx.fillStyle = "yellow"
+            this.ctx.fillRect(10, 30, health / 4, 10)
+        }
+        else {
+            this.ctx.fillStyle = "green"
+            this.ctx.fillRect(10, 30, health / 4, 10)
+        }
+        
+        // text
+    
+        this.ctx.font = "40px ARCADECLASSIC"
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText( "HP", 10, 27)
+
+        if (health < 100){
+            this.ctx.font = "40px ARCADECLASSIC"
+            this.ctx.fillStyle = "red";
+            this.ctx.fillText(`${health}/ 1000`, 80, 27)
+        }
+        else if (health < 700) {
+            this.ctx.font = "40px ARCADECLASSIC"
+            this.ctx.fillStyle = "yellow";
+            this.ctx.fillText(`${health}/ 1000`, 80, 27)
+        }
+        else {
+            this.ctx.font = "40px ARCADECLASSIC"
+            this.ctx.fillStyle = "white";
+            this.ctx.fillText(`${health}/ 1000`, 80, 27)
+        }
+        
+
     }
 
     generateEnemy() {
@@ -85,8 +126,11 @@ export default class Game {
                 90, 150
             );
             currentEnemy.y += 3;
-            Util.collision(this.player1.x + 67, this.player1.y, 60, this.player1.height,
-                currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight);
+            if (Util.collision(this.player1.x + 67, this.player1.y, 60, this.player1.height,
+                currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
+                    this.health -= 1;
+                    console.log(this.health);
+                }
         }
         if (currentEnemy.y > this.height && currentEnemy.type ==="stupid") {
             this.enemies.splice(enemyNum, 1)
@@ -99,27 +143,39 @@ export default class Game {
                 currentEnemy.width, currentEnemy.height, currentEnemy.x, currentEnemy.y,
                 90, 150
                 );
-            currentEnemy.y -= 6;
+            
             if (this.player1.x + 20  > currentEnemy.x) {
                 currentEnemy.x += 4;
+                currentEnemy.y -= 6;
+            }
+            else if (Util.between(this.player1.x + 20, currentEnemy.x, currentEnemy.x + 20)) {
+                currentEnemy.y -= 12;
+                // debugger
             }
             else {
                 currentEnemy.x -= 4;
+                currentEnemy.y -= 6;
             }
-            Util.collision(this.player1.x + 67, this.player1.y, 60, this.player1.height,
-                currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight);
+            if (Util.collision(this.player1.x + 67, this.player1.y, 60, this.player1.height,
+                currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
+                    this.health -= 5;
+                    console.log(this.health);
+                }
         }
         if (currentEnemy.y < -150 && currentEnemy.type === "crazy") {
             this.enemies.splice(enemyNum, 1)
             // debugger
         }
     }
+    checkGameover() {
+        if (this.health <= 0) {
+            window.alert("gameover");
+        }
+    }
     animate() {
         this.ctx.clearRect(0, 0, this.width, this.height)
         this.drawBackground();
         if (this.enemies[0]) {
-            // Util.collision(this.player1.x + 67, this.player1.y, 60, this.player1.height,
-            //     this.enemies[0].x, this.enemies[0].y, this.enemies[0].hitboxWidth, this.enemies[0].hitboxHeight);
             this.drawEnemy(0);
         }
         if (this.enemies[1]) {
@@ -135,9 +191,11 @@ export default class Game {
             this.drawEnemy(4);
         }
         this.drawPlayer();
+        this.drawHealth(this.health);
         this.player1.movePlayer();
         this.player1.handlePlayerFrame();
         this.generateEnemy();
+        this.checkGameover();
         requestAnimationFrame(this.animate.bind(this));
     }
 

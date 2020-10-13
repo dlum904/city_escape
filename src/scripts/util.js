@@ -22,7 +22,7 @@ const Util = {
                 // console.log("COLLISIONY")
             }
         if ((xCollision === true && yCollision === true)) {
-            debugger
+            // debugger
             console.log("COLLISION")
             return true;
         }
