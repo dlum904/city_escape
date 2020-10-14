@@ -16,7 +16,7 @@ export default class GameView {
     }
     
     start() {
-        this.game.startAnimating(10);
+        this.game.startAnimating(30);
         // this.game.animate();
     }
 
@@ -24,7 +24,7 @@ export default class GameView {
         this.game.gameover = false;
         this.game.health = 1000;
         this.game.enemies = [];
-        this.game.startAnimating(10);
+        this.game.startAnimating(30);
     }
 
 }

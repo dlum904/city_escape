@@ -35,7 +35,7 @@ const Util = {
         let unitYHitBox = [unity, unity + unith];
         let xAttacked;
         let yAttacked;
-        debugger
+        // debugger
         if (Util.between(attackTypeX[0], unitXHitBox[0], unitXHitBox[1]) ||
             Util.between(attackTypeX[1], unitXHitBox[0], unitXHitBox[1])) {
             xAttacked = true;

@@ -20,6 +20,7 @@ export default class Game {
         this.now;
         this.then;
         this.elapsed;
+        this.slice = new Audio('./src/audio/slice.mp3')
     }
 
     drawBackground() {
@@ -135,12 +136,14 @@ export default class Game {
                 if (Util.attacked(this.player1.lAttackXHitBox, this.player1.lAttackYHitBox,
                     currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
                     this.enemies.splice(enemyNum, 1)
+                    this.slice.play();
                     }
             }
             if (this.player1.rightAttack) {
                 if (Util.attacked(this.player1.rAttackXHitBox, this.player1.rAttackYHitBox,
                     currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
                     this.enemies.splice(enemyNum, 1)
+                    this.slice.play();
                 }
             }
             if (currentEnemy.y > this.height && currentEnemy.type ==="stupid") {
@@ -176,12 +179,14 @@ export default class Game {
                 if (Util.attacked(this.player1.lAttackXHitBox, this.player1.lAttackYHitBox,
                     currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
                     this.enemies.splice(enemyNum, 1)
+                    this.slice.play();
                 }
             }
             if (this.player1.rightAttack) {
                 if (Util.attacked(this.player1.rAttackXHitBox, this.player1.rAttackYHitBox,
                     currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
                     this.enemies.splice(enemyNum, 1)
+                    this.slice.play();
                 }
             }
             if (currentEnemy.y < -150 && currentEnemy.type === "crazy") {
