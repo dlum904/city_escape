@@ -233,11 +233,14 @@ export default class Game {
                 if (this.enemies[4]) {
                     this.drawEnemy(4);
                 }
+                this.player1.movePlayer();
                 this.drawPlayer();
                 this.drawHealth(this.health);
-                this.player1.movePlayer();
                 this.generateEnemy();
                 this.checkGameover();
+                // if (this.attackCD != 0) {
+                //     this.player1.attackCD--;
+                // }
                 requestAnimationFrame(this.animate.bind(this));
             }
     }
