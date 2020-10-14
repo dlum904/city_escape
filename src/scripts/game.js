@@ -131,10 +131,22 @@ export default class Game {
                     this.health -= 1;
                     console.log(this.health);
                 }
-        }
-        if (currentEnemy.y > this.height && currentEnemy.type ==="stupid") {
-            this.enemies.splice(enemyNum, 1)
-            // debugger
+            if (this.player1.leftAttack) {
+                if (Util.attacked(this.player1.lAttackXHitBox, this.player1.lAttackYHitBox,
+                    currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
+                    this.enemies.splice(enemyNum, 1)
+                    }
+            }
+            if (this.player1.rightAttack) {
+                if (Util.attacked(this.player1.rAttackXHitBox, this.player1.rAttackYHitBox,
+                    currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
+                    this.enemies.splice(enemyNum, 1)
+                }
+            }
+            if (currentEnemy.y > this.height && currentEnemy.type ==="stupid") {
+                this.enemies.splice(enemyNum, 1)
+                // debugger
+            }
         }
 
         if (currentEnemy.type === "crazy") {
@@ -159,44 +171,76 @@ export default class Game {
             if (Util.collision(this.player1.x + 67, this.player1.y, 60, this.player1.height,
                 currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
                     this.health -= 5;
-                    console.log(this.health);
                 }
-        }
-        if (currentEnemy.y < -150 && currentEnemy.type === "crazy") {
-            this.enemies.splice(enemyNum, 1)
-            // debugger
+            if (this.player1.leftAttack) {
+                if (Util.attacked(this.player1.lAttackXHitBox, this.player1.lAttackYHitBox,
+                    currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
+                    this.enemies.splice(enemyNum, 1)
+                }
+            }
+            if (this.player1.rightAttack) {
+                if (Util.attacked(this.player1.rAttackXHitBox, this.player1.rAttackYHitBox,
+                    currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
+                    this.enemies.splice(enemyNum, 1)
+                }
+            }
+            if (currentEnemy.y < -150 && currentEnemy.type === "crazy") {
+                this.enemies.splice(enemyNum, 1)
+            }
         }
     }
     checkGameover() {
         if (this.health <= 0) {
-            window.alert("gameover");
+            this.gameover = true;
+            const snaake = new Audio('./src/audio/Gameover.mp3')
+            snaake.play();
+            this.ctx.font = "80px ARCADECLASSIC"
+            this.ctx.fillStyle = "white";
+            this.ctx.fillText("GAME OVER", 245, 300)
         }
     }
+
+    startAnimating(fps) {
+        this.fpsInterval = 1000 / fps;
+        this.then = Date.now();
+        this.startTime = this.then;
+        this.animate();
+    }
+
     animate() {
-        this.ctx.clearRect(0, 0, this.width, this.height)
-        this.drawBackground();
-        if (this.enemies[0]) {
-            this.drawEnemy(0);
-        }
-        if (this.enemies[1]) {
-            this.drawEnemy(1);
-        }
-        if (this.enemies[2]) {
-            this.drawEnemy(2);
-        }
-        if (this.enemies[3]) {
-            this.drawEnemy(3);
-        }
-        if (this.enemies[4]) {
-            this.drawEnemy(4);
-        }
-        this.drawPlayer();
-        this.drawHealth(this.health);
-        this.player1.movePlayer();
-        this.player1.handlePlayerFrame();
-        this.generateEnemy();
-        this.checkGameover();
         requestAnimationFrame(this.animate.bind(this));
+        this.now = Date.now();
+        this.elapsed = this.now - this.then;
+        if (this.elapsed > this.fpsInterval) {
+            this.then = this.now - (this.elapsed % this.fpsInterval);
+            if (!this.gameover) {
+                
+                this.ctx.clearRect(0, 0, this.width, this.height)
+                this.drawBackground();
+                this.player1.handlePlayerFrame();
+                if (this.enemies[0]) {
+                    this.drawEnemy(0);
+                }
+                if (this.enemies[1]) {
+                    this.drawEnemy(1);
+                }
+                if (this.enemies[2]) {
+                    this.drawEnemy(2);
+                }
+                if (this.enemies[3]) {
+                    this.drawEnemy(3);
+                }
+                if (this.enemies[4]) {
+                    this.drawEnemy(4);
+                }
+                this.drawPlayer();
+                this.drawHealth(this.health);
+                this.player1.movePlayer();
+                this.generateEnemy();
+                this.checkGameover();
+                requestAnimationFrame(this.animate.bind(this));
+            }
+    }
     }
 
     // startAnimating(fps) {

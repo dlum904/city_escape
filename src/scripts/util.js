@@ -23,7 +23,32 @@ const Util = {
             }
         if ((xCollision === true && yCollision === true)) {
             // debugger
-            console.log("COLLISION")
+            // console.log("COLLISION")
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
+    attacked(attackTypeX, attackTypeY, unitx, unity, unitw, unith) {
+        let unitXHitBox = [unitx, unitx + unitw];
+        let unitYHitBox = [unity, unity + unith];
+        let xAttacked;
+        let yAttacked;
+        debugger
+        if (Util.between(attackTypeX[0], unitXHitBox[0], unitXHitBox[1]) ||
+            Util.between(attackTypeX[1], unitXHitBox[0], unitXHitBox[1])) {
+            xAttacked = true;
+            console.log("X ATTACKED")
+        }
+        if (Util.between(attackTypeY[0], unitYHitBox[0], unitYHitBox[1]) ||
+            Util.between(attackTypeY[1], unitYHitBox[0], unitYHitBox[1])) {
+            yAttacked = true;
+            
+        }
+        if ((xAttacked === true && yAttacked === true)) {
+            // debugger
+            console.log("SLICE!")
             return true;
         }
         else {

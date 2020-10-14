@@ -12,6 +12,10 @@ export default class Player {
         this.moving = false;
         this.leftAttack = false;
         this.rightAttack = false;
+        this.lAttackXHitBox;
+        this.lAttackYHitBox;
+        this.rAttackXHitBox;
+        this.rAttackYHitBox;
         this.playerSprite = new Image();
         this.playerSprite.src = "./src/images/bike1.png";
         this.keys = [];
@@ -31,6 +35,7 @@ export default class Player {
             this.rightAttack = false;
         })
 
+        
 
     }
  
@@ -81,7 +86,28 @@ export default class Player {
         else {
             this.frameX = 0
         }
+        this.handlePlayerAttack();
     }
 
+    handlePlayerAttack() {
+        debugger
+        if (this.leftAttack) {
+            debugger
+            this.lAttackXHitBox = [this.x, this.x + 64];
+            this.lAttackYHitBox = [this.y, this.y + 88];
+        }
+        if (this.rightAttack) {
+            this.rAttackXHitBox = [this.x + this.width, this.x + 64];
+            this.rAttackYHitBox = [this.y, this.y + 88];
+        }
+        if (!this.leftAttack) {
+            this.lAttackXHitBox = [];
+            this.lAttackYHitBox = [];
+        }
+        if (!this.rightAttack) {
+            this.rAttackXHitBox = [];
+            this.rAttackYHitBox = [];
+        }
+    }
 
 }
