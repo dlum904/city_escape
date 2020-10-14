@@ -3,20 +3,28 @@ import Game from "./game";
 export default class GameView {
     constructor(canvas) {
         this.game = new Game(canvas)
-        // this.health = 1000;
-        
+        this.restart();
+        this.registerEvents();
+    }
+    
+    registerEvents() {
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "r") {
+                this.restart();
+            }
+        })
     }
     
     start() {
-        this.game.animate();
-        if (this.game.gameover === true) {
-            // do something when the game is over
-        }
+        this.game.startAnimating(30);
+        // this.game.animate();
     }
 
-    // checkGameover() {
-    //     if (this.health === 0) {
-    //         this.gameover = true;
-    //     }
-    // }
+    restart() {
+        this.game.gameover = false;
+        this.game.health = 1000;
+        this.game.enemies = [];
+        this.game.startAnimating(30);
+    }
+
 }

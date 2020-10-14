@@ -2,7 +2,7 @@ export default class Player {
     constructor() {
         this.x = 300;
         this.y = 200;
-        this.width = 186;
+        this.width = 187;
         this.height = 130;
         this.xHitBox = [this.x, this.x + this.width];
         this.yHitBox = [this.y, this.y +this.height];
@@ -12,9 +12,14 @@ export default class Player {
         this.moving = false;
         this.leftAttack = false;
         this.rightAttack = false;
+        this.lAttackXHitBox;
+        this.lAttackYHitBox;
+        this.rAttackXHitBox;
+        this.rAttackYHitBox;
         this.playerSprite = new Image();
         this.playerSprite.src = "./src/images/bike1.png";
         this.keys = [];
+        // this.attackCD = 0
         this.registerEvents();
     }
 
@@ -22,7 +27,6 @@ export default class Player {
         // debugger
         window.addEventListener("keydown", (e) => {
             this.keys[e.key] = true;
-            this.moving = true;
         })
         window.addEventListener("keyup", (e) => {
             delete this.keys[e.key];
@@ -52,23 +56,28 @@ export default class Player {
                 this.x += this.speed;
                 this.moving = true;
         }
-        if (this.keys.q) {
+        else if (this.keys.q) {
             this.frameX = 0;
             this.frameY = 2;
+            this.moving = false;
             this.leftAttack = true;
+            // this.attackCD = 30
+            // setTimeout(() => this.leftAttack = false, 3000)
         }
-        if (this.keys.e) {
+        else if (this.keys.e) {
             this.frameX = 0;
             this.frameY = 1;
+            this.moving = false;
             this.rightAttack = true;
-
+            // this.attackCD = 30
+            // setTimeout(() => this.rightAttack = false, 3000)
         }
     }
 
     handlePlayerFrame() {
-        if (this.frameX < 1 && this.moving) {
+        if (this.moving) {
+            console.log(this.frameX)
             this.frameX++
-            console.log("moving")
         }
         if (!this.rightAttack && this.frameY === 1) {
             this.frameY = 0;
@@ -78,10 +87,31 @@ export default class Player {
             this.frameY = 0;
             console.log("L ATTACK")
         }
-        else {
+        else if (this.frameX >= 2){
+            console.log()
             this.frameX = 0
         }
+        this.handlePlayerAttack();
     }
 
+    handlePlayerAttack() {
+        // debugger
+        if (this.leftAttack) {
+            this.lAttackXHitBox = [this.x, this.x + 64];
+            this.lAttackYHitBox = [this.y, this.y + 88];
+        }
+        if (this.rightAttack) {
+            this.rAttackXHitBox = [this.x + this.width, this.x + 64];
+            this.rAttackYHitBox = [this.y, this.y + 88];
+        }
+        else if (!this.leftAttack) {
+            this.lAttackXHitBox = [];
+            this.lAttackYHitBox = [];
+        }
+        else if (!this.rightAttack) {
+            this.rAttackXHitBox = [];
+            this.rAttackYHitBox = [];
+        }
+    }
 
 }

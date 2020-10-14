@@ -8,6 +8,4 @@ canvas.height = 650;
 // const game1 = new Game(canvas)
 new GameView(canvas).start()
 
-// game1.animate();
-// game1.startAnimating(40);
 
