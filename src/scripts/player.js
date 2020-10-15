@@ -76,7 +76,7 @@ export default class Player {
 
     handlePlayerFrame() {
         if (this.moving) {
-            console.log(this.frameX)
+            // console.log(this.frameX)
             this.frameX++
         }
         if (!this.rightAttack && this.frameY === 1) {
@@ -88,7 +88,7 @@ export default class Player {
             console.log("L ATTACK")
         }
         else if (this.frameX >= 2){
-            console.log()
+            // console.log()
             this.frameX = 0
         }
         this.handlePlayerAttack();
@@ -97,12 +97,12 @@ export default class Player {
     handlePlayerAttack() {
         // debugger
         if (this.leftAttack) {
-            this.lAttackXHitBox = [this.x, this.x + 64];
-            this.lAttackYHitBox = [this.y, this.y + 88];
+            this.lAttackXHitBox = [this.x + 70, this.x + 70 - 30];
+            this.lAttackYHitBox = [this.y, this.y + 79];
         }
         if (this.rightAttack) {
-            this.rAttackXHitBox = [this.x + this.width, this.x + 64];
-            this.rAttackYHitBox = [this.y, this.y + 88];
+            this.rAttackXHitBox = [this.x + 150, this.x + 150 + 30];
+            this.rAttackYHitBox = [this.y, this.y + 79];
         }
         else if (!this.leftAttack) {
             this.lAttackXHitBox = [];
