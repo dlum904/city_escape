@@ -13,16 +13,35 @@ export default class Enemy {
                 this.enemySprite.src = "./src/images/car1.png"
                 this.x = Math.floor(Math.random() * (550 - 120) + 120)
                 this.y = -100;
+                this.speed = 3;
                 break;
             case "crazy":
                 this.enemySprite.src = "./src/images/car2.png"
                 this.x = Math.floor(Math.random() * (550 - 120) + 120)
                 this.y = 650;
+                this.turning = 4;
+                this.speed = 6;
                 break;
             default:
                 }
         this.xHitBox = [this.x, this.x + this.hitboxWidth];
         this.yHitBox = [this.y, this.y + this.hitboxHeight];
+        // this.dying = false;
+        this.frameX = 0
+        this.dead = false;
     }
+
+    sayHello() {
+        console.log("Hello")
+    }
+    // handleEnemyFrame() {
+    //     debugger
+    //     if (this.type === "damaged-crazy") {
+    //         this.frameX+= 0.1
+    //     }
+    //     if (this.frameX > 4) {
+    //         this.destroy();
+    //     }
+    // }
 
 }
