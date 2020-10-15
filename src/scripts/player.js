@@ -19,7 +19,7 @@ export default class Player {
         this.playerSprite = new Image();
         this.playerSprite.src = "./src/images/bike1.png";
         this.keys = [];
-        // this.attackCD = 0
+        // this.attackReady
         this.registerEvents();
     }
 
@@ -31,8 +31,8 @@ export default class Player {
         window.addEventListener("keyup", (e) => {
             delete this.keys[e.key];
             this.moving = false;
-            this.leftAttack = false;
-            this.rightAttack = false;
+            if (e.key === "q") this.leftAttack = true;
+            if (e.key === "e") this.rightAttack = true;
         })
 
 
@@ -56,27 +56,24 @@ export default class Player {
                 this.x += this.speed;
                 this.moving = true;
         }
-        else if (this.keys.q) {
+        if (this.leftAttack) {
             this.frameX = 0;
             this.frameY = 2;
             this.moving = false;
-            this.leftAttack = true;
-            // this.attackCD = 30
-            // setTimeout(() => this.leftAttack = false, 3000)
+            // this.leftAttack = true;
+            setTimeout(() => this.leftAttack = false, 500)
         }
-        else if (this.keys.e) {
+        if (this.rightAttack) {
             this.frameX = 0;
             this.frameY = 1;
             this.moving = false;
-            this.rightAttack = true;
-            // this.attackCD = 30
-            // setTimeout(() => this.rightAttack = false, 3000)
+            // this.rightAttack = true;
+            setTimeout(() => this.rightAttack = false, 500)
         }
     }
 
     handlePlayerFrame() {
-        if (this.moving) {
-            // console.log(this.frameX)
+        if (this.moving && (!this.leftAttack || !this.rightAttack)) {
             this.frameX++
         }
         if (!this.rightAttack && this.frameY === 1) {
@@ -95,7 +92,6 @@ export default class Player {
     }
 
     handlePlayerAttack() {
-        // debugger
         if (this.leftAttack) {
             this.lAttackXHitBox = [this.x + 70, this.x + 70 - 30];
             this.lAttackYHitBox = [this.y, this.y + 79];
@@ -104,11 +100,11 @@ export default class Player {
             this.rAttackXHitBox = [this.x + 150, this.x + 150 + 30];
             this.rAttackYHitBox = [this.y, this.y + 79];
         }
-        else if (!this.leftAttack) {
+        if (!this.leftAttack) {
             this.lAttackXHitBox = [];
             this.lAttackYHitBox = [];
         }
-        else if (!this.rightAttack) {
+        if (!this.rightAttack) {
             this.rAttackXHitBox = [];
             this.rAttackYHitBox = [];
         }
