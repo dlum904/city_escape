@@ -27,10 +27,10 @@ export default class GameView {
             if (e.key === "Enter") {
                 this.restart();
             }
-            if (e.key === "m" && this.muted === false) {
+            if (e.key === "n" && this.muted === false) {
                 this.toggleMuteOn()
             }
-            else if (e.key === "n" && this.muted === true ) {
+            else if (e.key === "m" && this.muted === true ) {
                 this.toggleMuteOff();
             }
 

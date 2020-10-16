@@ -23,8 +23,10 @@ export default class Game {
         this.then;
         this.elapsed;
         this.slice = new Audio('./src/audio/slice.mp3')
+        this.oof = new Audio('./src/audio/oof.mp3')
         this.score = 0;
         // this.drawBackground();
+        // this.drawPlayer();
         
     }
 
@@ -107,8 +109,8 @@ export default class Game {
 
     generateEnemy() {
         // logic for when to generate an enemy.  will push into this.enemies
-        const randomNum = Math.floor((Math.random() * 80));
-        if (this.enemies.length < 4 && randomNum === 5) {
+        const randomNum = Math.floor((Math.random() * 70));
+        if (this.enemies.length < 5 && randomNum === 5) {
             console.log("generating enemy")
             
             const randomEnemyNum = Math.floor((Math.random() * 100))
@@ -136,9 +138,10 @@ export default class Game {
                 90, 150
             );
             currentEnemy.y += currentEnemy.speed;
-            if (Util.collision(this.player1.x + 67, this.player1.y, 60, this.player1.height,
+            if (Util.collision(this.player1.x + 74, this.player1.y + 16, 38, 80,
                 currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
                     this.health -= 1;
+                    this.oof.play();
                 this.drawUI(this.health, this.score);
                     console.log(this.health);
                 }
@@ -180,9 +183,10 @@ export default class Game {
                 currentEnemy.x -= currentEnemy.turning;
                 currentEnemy.y -= currentEnemy.speed;
             }
-            if (Util.collision(this.player1.x + 67, this.player1.y, 60, this.player1.height,
+            if (Util.collision(this.player1.x + 74, this.player1.y + 16, 38, 80,
                 currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
                     this.health -= 5;
+                this.oof.play();
                     this.drawUI(this.health,this.score);
                 }
             if (this.player1.leftAttack) {
@@ -251,6 +255,30 @@ export default class Game {
             this.ctx.font = "80px ARCADECLASSIC"
             this.ctx.fillStyle = "white";
             this.ctx.fillText("GAME OVER", 245, 300)
+
+            this.ctx.font = "20px ARCADECLASSIC"
+            this.ctx.fillStyle = "white";
+            this.ctx.fillText(`SCORE: ${this.score}` , 245, 350)
+
+            if (this.score <= 10000) {
+                this.ctx.font = "20px ARCADECLASSIC"
+                this.ctx.fillStyle = "white";
+                this.ctx.fillText(`RANK: NOOB`, 500, 350)
+            }
+            else if (this.score <= 20000) {
+                this.ctx.font = "20px ARCADECLASSIC"
+                this.ctx.fillStyle = "white";
+                this.ctx.fillText(`RANK: TWINKLE  TOES`, 500, 350)
+            }
+            else if (this.score <= 50000) {
+                this.ctx.font = "20px ARCADECLASSIC"
+                this.ctx.fillStyle = "white";
+                this.ctx.fillText(`RANK: FINISHED STRONG!`, 500, 350)
+            }
+
+            this.ctx.font = "40px ARCADECLASSIC"
+            this.ctx.fillStyle = "white";
+            this.ctx.fillText("PRESS  ENTER  TO  RESTART", 200, 400)
 
             const snaake = new Audio('./src/audio/Gameover.mp3')
             snaake.play();
