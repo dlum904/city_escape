@@ -1,74 +1,106 @@
 import Game from "./game";
 
 export default class GameView {
-    constructor(canvas, canvasUI) {
-        this.ctxUI = canvasUI.getContext("2d");
-        this.game = new Game(canvas)
-        this.restart();
+    constructor(canvas, canvasSplash, canvasUI) {
+        // this.ctxUI = canvasUI.getContext("2d");
+        this.game = new Game(canvas, canvasSplash, canvasUI)
+        this.ctxSplash = canvasSplash.getContext("2d")
+        this.width = canvasSplash.width;
+        this.height = canvasSplash.height;
+        this.topLoop = -canvasSplash.height;
+        this.bottomLoop = 0;
+        this.background = new Image()
+        this.background.src = "./src/images/background-1.png";
+        // this.fpsInterval;
+        // this.startTime;
+        // this.now;
+        // this.then;
+        // this.elapsed;
+        this.muted = false;
+        this.audio = document.getElementById("music");
+        this.menuKeys = []
         this.registerEvents();
     }
     
     registerEvents() {
         window.addEventListener("keydown", (e) => {
-            if (e.key === "r") {
+            if (e.key === "Enter") {
                 this.restart();
             }
+            if (e.key === "m" && this.muted === false) {
+                this.toggleMuteOn()
+            }
+            else if (e.key === "n" && this.muted === true ) {
+                this.toggleMuteOff();
+            }
+
+            // if (e.key === "m")
+            //     this.muted ? this.toggleMuteOff() : this.toggleMuteOff();
         })
     }
     
-    // drawHealth(health) {
-    //     // initial health
-    //     this.ctxUI.fillStyle = "red"
-    //     this.ctxUI.fillRect(10, 30, 250, 10)
+    toggleMuteOn() {
+        // debugger
+        if (this.muted === false) {
+            console.log("mute")
+                this.muted = true;
+                this.audio.pause()
+        }
+    }
+    toggleMuteOff() {
+        // debugger
+        console.log("unmute")
+            this.muted = false;
+            this.audio.play();
+    }
 
-    //     this.ctxUI.beginPath();
-    //     this.ctxUI.lineWidth = "3";
-    //     this.ctxUI.strokeStyle = "white";
-    //     this.ctxUI.rect(9, 29, 252, 12)
-    //     this.ctxUI.stroke();
+    drawStaticBackground() {
+        //bottom half of the background
+        this.ctxSplash.drawImage(
+            this.background, 0, 0,
+            this.width, this.height,
+            0, this.bottomLoop, this.width, this.height
+        )
+        // this.bottomLoop += 10;
+        // if (this.bottomLoop === this.height) this.bottomLoop = -this.height;
+        // //top half of the background
+        // this.ctxSplash.drawImage(
+        //     this.background, 0, 0,
+        //     this.width, this.height,
+        //     0, this.topLoop, this.width, this.height
+        // )
+        // this.topLoop += 10;
+        // if (this.topLoop === this.height) this.topLoop = -this.height;
+    }
 
-    //     // your actual health
-    //     if (health < (700)) {
-    //         this.ctxUI.fillStyle = "yellow"
-    //         this.ctxUI.fillRect(10, 30, health / 4, 10)
-    //     }
-    //     else {
-    //         this.ctxUI.fillStyle = "green"
-    //         this.ctxUI.fillRect(10, 30, health / 4, 10)
-    //     }
+    // startAnimating(fps) {
+    //     this.fpsInterval = 1000 / fps;
+    //     this.then = Date.now();
+    //     this.startTime = this.then;
+    //     this.animateTitle();
+    // }
 
-    //     // text
-    //     this.ctxUI.font = "40px ARCADECLASSIC"
-    //     this.ctxUI.fillStyle = "white";
-    //     this.ctxUI.fillText("HP", 10, 27)
-
-    //     if (health < 100) {
-    //         this.ctxUI.font = "40px ARCADECLASSIC"
-    //         this.ctxUI.fillStyle = "red";
-    //         this.ctxUI.fillText(`${health}/ 1000`, 80, 27)
-    //     }
-    //     else if (health < 700) {
-    //         this.ctxUI.font = "40px ARCADECLASSIC"
-    //         this.ctxUI.fillStyle = "yellow";
-    //         this.ctxUI.fillText(`${health}/ 1000`, 80, 27)
-    //     }
-    //     else {
-    //         this.ctxUI.font = "40px ARCADECLASSIC"
-    //         this.ctxUI.fillStyle = "white";
-    //         this.ctxUI.fillText(`${health}/ 1000`, 80, 27)
+    // animateTitle() {
+    //     requestAnimationFrame(this.animateTitle.bind(this));
+    //     this.now = Date.now();
+    //     this.elapsed = this.now - this.then;
+    //     if (this.elapsed > this.fpsInterval) {
+    //         this.then = this.now - (this.elapsed % this.fpsInterval);
+    //         this.drawBackground();
+    //         // requestAnimationFrame(this.animateTitle.bind(this));
     //     }
     // }
 
     start() {
-        // this.drawHealth(this.game.health)
+        // this.startAnimating(45);
         this.game.startAnimating(45);
-        // this.game.animate();
     }
 
     restart() {
         this.game.gameover = false;
         this.game.health = 1000;
         this.game.enemies = [];
+        // this.startAnimating(45);
         this.game.startAnimating(45);
     }
 
