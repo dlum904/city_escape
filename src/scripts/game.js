@@ -115,11 +115,21 @@ export default class Game {
             
             const randomEnemyNum = Math.floor((Math.random() * 100))
             let enemyType
-            if (randomEnemyNum >= 40) {
-                enemyType = "stupid"
-            }
-            else {
-                enemyType = "crazy"
+            if (randomEnemyNum > 80) {
+                enemyType = "turtle";
+            } 
+            if (enemyType !== "turtle") {
+
+                if (randomEnemyNum <= 50) {
+                    enemyType = "stupid"
+                }
+                // x >= min && x <= max;
+                // else if (randomEnemyNum > 10 && randomEnemyNum < 50 ) {
+                //     enemyType = "crazy"
+                // }
+                else {
+                    enemyType = "crazy"
+                }
             }
             console.log(enemyType);
             if (typeof enemyType === "string") {
@@ -128,7 +138,7 @@ export default class Game {
         }
     }
 
-    drawEnemy(enemyNum) {
+    drawEnemy(enemyNum) {           //TODO: REFACTOR TO A SWITCH CASE
         let currentEnemy = this.enemies[enemyNum];
         // ANIMATING THE STUPID ENEMY
         if (currentEnemy.type === "stupid") {
@@ -205,6 +215,87 @@ export default class Game {
                     }
             }
             if (currentEnemy.y < -150 && currentEnemy.type === "crazy") {
+                this.enemies.splice(enemyNum, 1)
+            }
+        }
+
+        // MICHAELANGELO!!!
+        if (currentEnemy.type === "turtle") {
+            switch (currentEnemy.direction) {
+                case "right":
+                    this.ctx.drawImage(
+                        currentEnemy.enemySprite, currentEnemy.width * currentEnemy.frameX, 0,
+                        currentEnemy.width, currentEnemy.height, currentEnemy.x, currentEnemy.y,
+                        75, 75
+                    );
+                    currentEnemy.x += 12;
+                    currentEnemy.y -= 4;
+                    break;
+                case "left":
+                    this.ctx.drawImage(
+                        currentEnemy.enemySprite, currentEnemy.width * currentEnemy.frameX, 0,
+                        currentEnemy.width, currentEnemy.height, currentEnemy.x, currentEnemy.y,
+                        75, 75
+                    );
+                    currentEnemy.x -= 12;
+                    currentEnemy.y -= 4;
+                    break;
+                case "down":
+                    this.ctx.drawImage(
+                        currentEnemy.enemySprite, 48, 55,
+                        currentEnemy.width, currentEnemy.height, currentEnemy.x, currentEnemy.y,
+                        75, 154
+                    );
+                    currentEnemy.y += 6;
+                    if (currentEnemy.frameX < 1) currentEnemy.frameX += 1;
+                    break;
+                default:
+
+            }
+            // if (currentEnemy.direction === "right") {
+            // }
+            // if (currentEnemy.direction === "left") {
+            // }
+            
+
+            if (currentEnemy.x <= 80) {
+                currentEnemy.frameX = 0;
+                currentEnemy.direction = "right";
+            }
+            if (currentEnemy.x >= 580) {
+                currentEnemy.frameX = 1;
+                currentEnemy.direction = "left";
+            }
+            if (currentEnemy.y <= 50) {
+                currentEnemy.direction = "down"
+                currentEnemy.width = 41;
+                currentEnemy.height = 86;
+                currentEnemy.frameX = 0;
+                currentEnemy.frameY = 1;
+            }
+
+            if (Util.collision(this.player1.x + 74, this.player1.y + 16, 38, 80,
+                currentEnemy.x, currentEnemy.y, 50, 53)) {
+                this.health -= 10;
+                this.oof.play();
+                this.drawUI(this.health, this.score);
+            }
+            // if (this.player1.leftAttack) {
+            //     if (Util.attacked(this.player1.lAttackXHitBox, this.player1.lAttackYHitBox,
+            //         currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
+            //         this.slice.play();
+            //         // currentEnemy.type = "damaged-crazy"
+            //     }
+            // }
+
+            // if (this.player1.rightAttack) {
+            //     if (Util.attacked(this.player1.rAttackXHitBox, this.player1.rAttackYHitBox,
+            //         currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
+            //         this.slice.play();
+            //         // currentEnemy.type = "damaged-crazy"
+            //     }
+            // }
+            if (currentEnemy.y < -150 && currentEnemy.type === "turtle") {
                 this.enemies.splice(enemyNum, 1)
             }
         }
@@ -308,7 +399,7 @@ export default class Game {
                 this.player1.movePlayer();
                 
                 for (let i = 0; i < this.enemies.length; i++ ) this.drawEnemy(i)
-                
+                this.score += 1;
                 this.drawPlayer();
                 this.generateEnemy();
                 this.checkGameover();

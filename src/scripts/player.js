@@ -9,7 +9,7 @@ export default class Player {
         this.frameX = 0;
         this.frameY = 0;
         this.speed = 10;
-        this.moving = false;
+        this.moving = true;
         this.leftAttack = false;
         this.rightAttack = false;
         this.lAttackXHitBox;
@@ -30,9 +30,14 @@ export default class Player {
         })
         window.addEventListener("keyup", (e) => {
             delete this.keys[e.key];
-            this.moving = false;
-            if (e.key === "ArrowLeft") this.leftAttack = true;
-            if (e.key === "ArrowRight") this.rightAttack = true;
+            if (e.key === "ArrowLeft") {
+                this.moving = false;
+                this.leftAttack = true;
+            }
+            if (e.key === "ArrowRight") {
+                this.moving = false;
+                this.rightAttack = true;
+            }
         })
 
 
@@ -79,10 +84,12 @@ export default class Player {
         if (!this.rightAttack && this.frameY === 1) {
             this.frameY = 0;
             console.log("R ATTACK")
+            this.moving = true;
         }
         if (!this.leftAttack && this.frameY === 2) {
             this.frameY = 0;
             console.log("L ATTACK")
+            this.moving = true;
         }
         else if (this.frameX >= 2){
             // console.log()
@@ -90,10 +97,10 @@ export default class Player {
         }
         this.handlePlayerAttack();
     }
-
+//
     handlePlayerAttack() {
         if (this.leftAttack) {
-            this.lAttackXHitBox = [this.x + 70, this.x + 70 - 30];
+            this.lAttackXHitBox = [this.x + 10, this.x + 60];
             this.lAttackYHitBox = [this.y, this.y + 79];
         }
         if (this.rightAttack) {
