@@ -1,7 +1,7 @@
 export default class Player {
     constructor() {
-        this.x = 300;
-        this.y = 200;
+        this.x = 329;
+        this.y = 344;
         this.width = 187;
         this.height = 130;
         this.xHitBox = [this.x, this.x + this.width];
@@ -31,8 +31,8 @@ export default class Player {
         window.addEventListener("keyup", (e) => {
             delete this.keys[e.key];
             this.moving = false;
-            if (e.key === "q") this.leftAttack = true;
-            if (e.key === "e") this.rightAttack = true;
+            if (e.key === "ArrowLeft") this.leftAttack = true;
+            if (e.key === "ArrowRight") this.rightAttack = true;
         })
 
 
@@ -61,14 +61,14 @@ export default class Player {
             this.frameY = 2;
             this.moving = false;
             // this.leftAttack = true;
-            setTimeout(() => this.leftAttack = false, 500)
+            setTimeout(() => this.leftAttack = false, 400)
         }
         if (this.rightAttack) {
             this.frameX = 0;
             this.frameY = 1;
             this.moving = false;
             // this.rightAttack = true;
-            setTimeout(() => this.rightAttack = false, 500)
+            setTimeout(() => this.rightAttack = false, 400)
         }
     }
 

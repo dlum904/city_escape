@@ -13,9 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
     canvasUI.height = 650;
     // const game1 = new Game(canvas)
     const newGameView = new GameView(canvas, canvasSplash, canvasUI).registerEvents()
-    // setTimeout(newGameView.toggleMute(), 3000);
-    // const audio = document.getElementById("music");
-    // audio.onload = () => audio.play()
+    const audio = document.getElementById("music");
+    setTimeout(() => audio.play(), 3000);
 })
 
 

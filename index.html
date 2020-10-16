@@ -11,23 +11,62 @@
 
   <body>
     <!-- <audio autoplay="true" src="./dist/audio/bike_chase.mp3"></audio> -->
-    <h1 class="title">CITY ESCAPE</h1>
-        <audio id="music" autoplay="true"  loop >
+    <p class="title-text">CITY ESCAPE</p>
+        <audio id="music"  loop >
           <source src="./dist/audio/bike_chase.mp3" type="audio/mpeg">
         </audio>
         <section class="instructions">
-          <p>w,a,s,d &nbsp to &nbsp move</p>
-          <p>q &nbsp and &nbsp e &nbsp to &nbsp attack</p>
+          <p>CONTROLS</p>
+          <p class="basic-control">w = up</p>
+          <p class="basic-control">a = left</p>
+          <p class="basic-control">s = down</p>
+          <p class="basic-control">d = right</p>
+          <p class="basic-control">q = left &nbsp attack</p>
+          <p class="basic-control">e = right &nbsp attack</p>
+          <div class="music-control">
+            <p>MUSIC</p>
+            <p>m = music on</p>
+            <p>n = music off</p>
+          </div>
         </section>
-        <div class="splash">
-          <img src="./dist/images/background-1.png">
-        </div>
+        <section class="scores">
+          <p>HIGH &nbsp SCORES</p>
+          <p>1. &nbsp &nbsp Dennis &nbsp 999999</p>
+          <p>2. &nbsp &nbsp Dennis &nbsp 999998</p>
+          <p>3. &nbsp &nbsp Dennis &nbsp 999997</p>
+          <p>4. &nbsp &nbsp Dennis &nbsp 999996</p>
+          <p>5. &nbsp &nbsp Dennis &nbsp 999995</p>
+          <p>6. &nbsp &nbsp Dennis &nbsp 999994</p>
+          <p>7. &nbsp &nbsp Dennis &nbsp 999993</p>
+          <p>8. &nbsp &nbsp Dennis &nbsp 999992</p>
+          <p>9. &nbsp &nbsp Dennis &nbsp 999991</p>
+          <p>10. Dennis &nbsp 999990</p>
+        </section>
+        <section class="splash">
+          <!-- <img src="./dist/images/background-1.png"> -->
+          <div class="title">
+            <p>Press &nbsp Enter &nbsp to &nbsp Start</p>
+            <p>Avoid &nbsp getting &nbsp hit</p>
+            <p>Destroy &nbsp vehicles &nbsp to &nbsp get &nbsp points</p>
+          </div>
+        </section>
         <canvas id="canvas-splash"></canvas>
         <canvas id="canvas-ui"></canvas>
         <canvas id="canvas-game"></canvas>
         <!-- <form action="">
           <input type="text">
         </form> -->
-    <script src="./dist/main.js"></script>
+
+        <section class="links">
+          <a href="https://www.linkedin.com/in/dennis-lum-12526b7a/">linkedin</a>
+          <a href="https://github.com/dlum904">GitHub</a>
+        </section>
+    <script src="./dist/main.js">
+      // document.getElementById("music").onload = () => {musicOn()}
+      // function musicOn() {
+      //   const audio = document.getElementById("music");
+      //   audio.play();
+      // }
+    </script>
   </body>
 </html>
