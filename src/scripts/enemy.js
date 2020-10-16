@@ -22,6 +22,17 @@ export default class Enemy {
                 this.turning = 4;
                 this.speed = 6;
                 break;
+            case "turtle":
+                this.enemySprite.src = "./src/images/turtle.png"
+                this.x = Math.floor(Math.random() * (550 - 120) + 120)
+                this.y = 650;
+                this.turning = 4;
+                this.speed = 6;
+                this.width = 50;
+                this.height = 53;
+                this.direction = "right"
+                this.frameY = 0;
+                break;
             default:
                 }
         this.xHitBox = [this.x, this.x + this.hitboxWidth];
