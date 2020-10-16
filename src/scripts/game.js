@@ -221,6 +221,12 @@ export default class Game {
 
         // MICHAELANGELO!!!
         if (currentEnemy.type === "turtle") {
+            // if (currentEnemy.y > 650) {
+                // console.log("wowowooo")
+                // debugger
+                // this.enemies.splice(enemyNum, 1)
+                // debugger
+            // }
             switch (currentEnemy.direction) {
                 case "right":
                     this.ctx.drawImage(
@@ -295,8 +301,10 @@ export default class Game {
             //         // currentEnemy.type = "damaged-crazy"
             //     }
             // }
-            if (currentEnemy.y < -150 && currentEnemy.type === "turtle") {
+            if (currentEnemy.y > 650) {
+                // debugger
                 this.enemies.splice(enemyNum, 1)
+                // debugger
             }
         }
 
