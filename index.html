@@ -12,12 +12,22 @@
   <body>
     <!-- <audio autoplay="true" src="./dist/audio/bike_chase.mp3"></audio> -->
     <h1 class="title">CITY ESCAPE</h1>
-        <audio autoplay="true" loop>
+        <audio id="music" autoplay="true"  loop >
           <source src="./dist/audio/bike_chase.mp3" type="audio/mpeg">
         </audio>
-        
+        <section class="instructions">
+          <p>w,a,s,d &nbsp to &nbsp move</p>
+          <p>q &nbsp and &nbsp e &nbsp to &nbsp attack</p>
+        </section>
+        <div class="splash">
+          <img src="./dist/images/background-1.png">
+        </div>
+        <canvas id="canvas-splash"></canvas>
         <canvas id="canvas-ui"></canvas>
         <canvas id="canvas-game"></canvas>
+        <!-- <form action="">
+          <input type="text">
+        </form> -->
     <script src="./dist/main.js"></script>
   </body>
 </html>

@@ -2,10 +2,12 @@ import Enemy from "./enemy";
 import Player from "./player";
 const Util = require("./util");
 export default class Game {
-    constructor(canvas) {
+    constructor(canvas, canvasSplash, canvasUI) {
         this.health = 1000;
         this.gameover = false;
+        this.ctxUI = canvasUI.getContext("2d");
         this.ctx = canvas.getContext("2d");
+        this.ctxSplash = canvasSplash.getContext("2d")
         this.player1 = new Player();
         this.width = canvas.width;
         this.height = canvas.height;
@@ -21,11 +23,14 @@ export default class Game {
         this.then;
         this.elapsed;
         this.slice = new Audio('./src/audio/slice.mp3')
+        this.score = 0;
+        // this.drawBackground();
+        
     }
 
     drawBackground() {
         //bottom half of the background
-        this.ctx.drawImage(
+        this.ctxSplash.drawImage(
             this.background, 0, 0,
             this.width, this.height,
             0, this.bottomLoop, this.width, this.height
@@ -33,7 +38,7 @@ export default class Game {
         this.bottomLoop += 10;
         if (this.bottomLoop === this.height) this.bottomLoop = -this.height;
         //top half of the background
-        this.ctx.drawImage(
+        this.ctxSplash.drawImage(
             this.background, 0, 0,
             this.width, this.height,
             0, this.topLoop, this.width, this.height
@@ -50,50 +55,54 @@ export default class Game {
         );
     }
 
-    drawHealth(health) {
+    drawUI(health, score) {
         // initial health
-        this.ctx.fillStyle = "red"
-        this.ctx.fillRect(10, 30, 250, 10)
+        this.ctxUI.clearRect(0, 0, this.width, this.height)
 
-        this.ctx.beginPath();
-        this.ctx.lineWidth = "3";
-        this.ctx.strokeStyle = "white";
-        this.ctx.rect(9, 29, 252, 12)
-        this.ctx.stroke();
+        this.ctxUI.fillStyle = "red"
+        this.ctxUI.fillRect(10, 30, 250, 10)
+
+        this.ctxUI.beginPath();
+        this.ctxUI.lineWidth = "3";
+        this.ctxUI.strokeStyle = "white";
+        this.ctxUI.rect(9, 29, 252, 12)
+        this.ctxUI.stroke();
 
         // your actual health
         if (health < (700)) {
-            this.ctx.fillStyle = "yellow"
-            this.ctx.fillRect(10, 30, health / 4, 10)
+            this.ctxUI.fillStyle = "yellow"
+            this.ctxUI.fillRect(10, 30, health / 4, 10)
         }
         else {
-            this.ctx.fillStyle = "green"
-            this.ctx.fillRect(10, 30, health / 4, 10)
+            this.ctxUI.fillStyle = "green"
+            this.ctxUI.fillRect(10, 30, health / 4, 10)
         }
-        
-        // text
-    
-        this.ctx.font = "40px ARCADECLASSIC"
-        this.ctx.fillStyle = "white";
-        this.ctx.fillText( "HP", 10, 27)
 
-        if (health < 100){
-            this.ctx.font = "40px ARCADECLASSIC"
-            this.ctx.fillStyle = "red";
-            this.ctx.fillText(`${health}/ 1000`, 80, 27)
+        // text
+        this.ctxUI.font = "40px ARCADECLASSIC"
+        this.ctxUI.fillStyle = "white";
+        this.ctxUI.fillText("HP", 10, 27)
+
+        if (health < 100) {
+            this.ctxUI.font = "40px ARCADECLASSIC"
+            this.ctxUI.fillStyle = "red";
+            this.ctxUI.fillText(`${health}/ 1000`, 80, 27)
         }
         else if (health < 700) {
-            this.ctx.font = "40px ARCADECLASSIC"
-            this.ctx.fillStyle = "yellow";
-            this.ctx.fillText(`${health}/ 1000`, 80, 27)
+            this.ctxUI.font = "40px ARCADECLASSIC"
+            this.ctxUI.fillStyle = "yellow";
+            this.ctxUI.fillText(`${health}/ 1000`, 80, 27)
         }
         else {
-            this.ctx.font = "40px ARCADECLASSIC"
-            this.ctx.fillStyle = "white";
-            this.ctx.fillText(`${health}/ 1000`, 80, 27)
+            this.ctxUI.font = "40px ARCADECLASSIC"
+            this.ctxUI.fillStyle = "white";
+            this.ctxUI.fillText(`${health}/ 1000`, 80, 27)
         }
-        
 
+        this.ctxUI.font = "25px ARCADECLASSIC"
+        this.ctxUI.fillStyle = "white";
+        this.ctxUI.textAlign = "start";
+        this.ctxUI.fillText(`${score}`, 750, 20)
     }
 
     generateEnemy() {
@@ -130,6 +139,7 @@ export default class Game {
             if (Util.collision(this.player1.x + 67, this.player1.y, 60, this.player1.height,
                 currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
                     this.health -= 1;
+                this.drawUI(this.health, this.score);
                     console.log(this.health);
                 }
             if (this.player1.leftAttack) {
@@ -173,6 +183,7 @@ export default class Game {
             if (Util.collision(this.player1.x + 67, this.player1.y, 60, this.player1.height,
                 currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
                     this.health -= 5;
+                    this.drawUI(this.health,this.score);
                 }
             if (this.player1.leftAttack) {
                 if (Util.attacked(this.player1.lAttackXHitBox, this.player1.lAttackYHitBox,
@@ -208,8 +219,11 @@ export default class Game {
             );
             currentEnemy.y += 4;
             currentEnemy.frameX += 0.1
-            // currentEnemy.handleEnemyFrame();
-            if (currentEnemy.frameX > 4) this.enemies.splice(enemyNum, 1)
+            
+            if (currentEnemy.frameX > 4) {
+                this.enemies.splice(enemyNum, 1)
+                this.score += 100
+            }
         }
 
         if (currentEnemy.type === "damaged-crazy") {
@@ -224,8 +238,10 @@ export default class Game {
             );
             currentEnemy.y += 4;
             currentEnemy.frameX += 0.1
-            // currentEnemy.handleEnemyFrame();
-            if (currentEnemy.frameX > 4) this.enemies.splice(enemyNum, 1)
+            if (currentEnemy.frameX > 4) {
+                this.enemies.splice(enemyNum, 1)
+                this.score += 500
+            }
         }
     }
     checkGameover() {
@@ -255,19 +271,20 @@ export default class Game {
         if (this.elapsed > this.fpsInterval) {
             this.then = this.now - (this.elapsed % this.fpsInterval);
             
+            this.drawUI(this.health, this.score)
+            
             if (!this.gameover) {
                 this.ctx.clearRect(0, 0, this.width, this.height)
                 this.drawBackground();
                 this.player1.handlePlayerFrame();
                 this.player1.movePlayer();
-
+                
                 for (let i = 0; i < this.enemies.length; i++ ) this.drawEnemy(i)
-
-                this.drawHealth(this.health);
+                
                 this.drawPlayer();
                 this.generateEnemy();
                 this.checkGameover();
-                requestAnimationFrame(this.animate.bind(this));
+                // requestAnimationFrame(this.animate.bind(this));
             }
         }
     }
