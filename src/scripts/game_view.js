@@ -93,7 +93,7 @@ export default class GameView {
 
     start() {
         // this.startAnimating(45);
-        this.game.startAnimating(45);
+        this.game.startAnimating(50);
     }
 
     restart() {
@@ -101,7 +101,7 @@ export default class GameView {
         this.game.health = 1000;
         this.game.enemies = [];
         // this.startAnimating(45);
-        this.game.startAnimating(45);
+        this.game.startAnimating(50);
     }
 
 }
