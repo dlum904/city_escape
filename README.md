@@ -10,7 +10,6 @@ This project will utilize:
 Players will be able to:
 -   Move around on a canvas, with restraints
 -   Initiate an attack on multiple directions (left/right)
--   Receive power-ups that will affect the player's unit in different ways (bonus?)
 
 This project will include:
 -   Enemy AI
@@ -18,11 +17,7 @@ This project will include:
 -   Collision
     -   When the player's unit collides with another object, there will be a collision.
 -   Game Over logic
-    -   When the player's unit reaches 3 collisions, they will get a game over.
--   Projectiles (bonus)
-    -   Some enemy units will be able to shoot projectiles that move in different speeds and patterns, which will also have collision with the player's units.
-    -   Player's attacks can reflect projectiles???
-    -   Make things explode and bounce around on-screen???
+    -   The player will lose health when colliding with another object.  When the player's health reaches 0, they will get a game over.
 
 # Wireframe:
 
@@ -50,13 +45,7 @@ Day4
 - Style everything.
 - Make a title screen
 
-Bonus
-- Create different types of projectiles that move differently
-- Give the player different powerups that affect the way their unit behaves
-- Add extra characters to play as.
-- Add a friendly unit the player must prevent from being hit by the enemy.
-- Add a boss that does cool stuff.
-- Leaderboard
-- Snazzy music
+Day5
+- Upload to GitHub Pages.
 
 
