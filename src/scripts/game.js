@@ -301,10 +301,9 @@ export default class Game {
             //         // currentEnemy.type = "damaged-crazy"
             //     }
             // }
-            if (currentEnemy.y > 650) {
-                // debugger
+            if (currentEnemy.y > 650) { // <--THIS SHOULD WORK
+           
                 this.enemies.splice(enemyNum, 1)
-                // debugger
             }
         }
 
