@@ -99,7 +99,10 @@ export default class GameView {
     restart() {
         this.game.gameover = false;
         this.game.health = 1000;
+        this.game.score = 0;
         this.game.enemies = [];
+        this.game.player1.x = 329;
+        this.game.player1.y = 344;
         // this.startAnimating(45);
         this.game.startAnimating(50);
     }
