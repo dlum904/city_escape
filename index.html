@@ -6,16 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./dist/main.css" />
     <link rel="icon" type="image/png" href="./dist/images/favicon.ico" />
-    <!-- <link rel="shortcut icon" href="./dist/images/favicon.ico"> -->
     <title>City Escape</title>
   </head>
 
   <body>
     <!-- <audio autoplay="true" src="./dist/audio/bike_chase.mp3"></audio> -->
     <p class="title-text">CITY ESCAPE</p>
-        <audio id="music"  loop >
+        <!-- <audio id="music"  loop >
           <source src="./dist/audio/bike_chase.mp3" type="audio/mpeg">
-        </audio>
+        </audio> -->
         <section class="instructions">
           <p>CONTROLS</p>
           <p class="basic-control">w = up</p>
@@ -26,8 +25,8 @@
           <p class="basic-control">right = right &nbsp attack</p>
           <div class="music-control">
             <p>MUSIC</p>
-            <p>m = music on</p>
-            <p>n = music off</p>
+              <input class="music-checkbox"type="checkbox">
+              <label for="music">ON/OFF</label>
           </div>
         </section>
         <section class="scores">
@@ -55,20 +54,11 @@
         <canvas id="canvas-splash"></canvas>
         <canvas id="canvas-ui"></canvas>
         <canvas id="canvas-game"></canvas>
-        <!-- <form action="">
-          <input type="text">
-        </form> -->
-
         <section class="links">
           <a href="https://www.linkedin.com/in/dennis-lum-12526b7a/">linkedin</a>
           <a href="https://github.com/dlum904">GitHub</a>
         </section>
     <script src="./dist/main.js">
-      // document.getElementById("music").onload = () => {musicOn()}
-      // function musicOn() {
-      //   const audio = document.getElementById("music");
-      //   audio.play();
-      // }
     </script>
   </body>
 </html>
