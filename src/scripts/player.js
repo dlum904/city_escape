@@ -24,7 +24,6 @@ export default class Player {
     }
 
     registerEvents() {
-        // debugger
         window.addEventListener("keydown", (e) => {
             this.keys[e.key] = true;
         })
@@ -39,8 +38,6 @@ export default class Player {
                 this.rightAttack = true;
             }
         })
-
-
     }
  
     

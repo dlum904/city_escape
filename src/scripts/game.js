@@ -40,6 +40,7 @@ export default class Game {
         )
         this.bottomLoop += 10;
         if (this.bottomLoop === this.height) this.bottomLoop = -this.height;
+
         //top half of the background
         this.ctxSplash.drawImage(
             this.background, 0, 0,
@@ -86,7 +87,12 @@ export default class Game {
         this.ctxUI.fillStyle = "white";
         this.ctxUI.fillText("HP", 10, 27)
 
-        if (health < 100) {
+        if (health <= 0) {
+            this.ctxUI.font = "40px ARCADECLASSIC"
+            this.ctxUI.fillStyle = "red";
+            this.ctxUI.fillText(`0 / 1000`, 80, 27)
+        }
+        else if (health < 100) {
             this.ctxUI.font = "40px ARCADECLASSIC"
             this.ctxUI.fillStyle = "red";
             this.ctxUI.fillText(`${health}/ 1000`, 80, 27)
@@ -112,7 +118,6 @@ export default class Game {
         // logic for when to generate an enemy.  will push into this.enemies
         const randomNum = Math.floor((Math.random() * 70));
         if (this.enemies.length < 5 && randomNum === 5) {
-            console.log("generating enemy")
             
             const randomEnemyNum = Math.floor((Math.random() * 100))
             let enemyType
@@ -120,21 +125,15 @@ export default class Game {
                 enemyType = "turtle";
             } 
             if (enemyType !== "turtle") {
-
                 if (randomEnemyNum <= 50) {
                     enemyType = "stupid"
                 }
-                // x >= min && x <= max;
-                // else if (randomEnemyNum > 10 && randomEnemyNum < 50 ) {
-                //     enemyType = "crazy"
-                // }
                 else {
                     enemyType = "crazy"
                 }
             }
-            console.log(enemyType);
             if (typeof enemyType === "string") {
-                this.enemies.push(new Enemy(this.ctx, enemyType));   // TODO: randomly choose the type
+                this.enemies.push(new Enemy(this.ctx, enemyType));
             }
         }
     }
@@ -182,14 +181,16 @@ export default class Game {
                 currentEnemy.width, currentEnemy.height, currentEnemy.x, currentEnemy.y,
                 90, 150
                 );
-            
+            // if the enemy is on the player's left side
             if (this.player1.x + 20  > currentEnemy.x) {
                 currentEnemy.x += currentEnemy.turning;
                 currentEnemy.y -= currentEnemy.speed;
             }
+            // if the enemy is aligned with the player
             else if (Util.between(this.player1.x + 20, currentEnemy.x, currentEnemy.x + 20)) {
                 currentEnemy.y -= 12;
             }
+            //if the enemy is on the player's right side
             else {
                 currentEnemy.x -= currentEnemy.turning;
                 currentEnemy.y -= currentEnemy.speed;

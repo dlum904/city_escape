@@ -1,15 +1,23 @@
 # JavaScript Project Proposal: City Escape
 City escape is essentially a top-down endless runner game.  The player will control a unit that will be riding along a highway.  Enemies will randomly spawn from the front or the rear.  The player must do their best to avoid or destroy enemies with a close range attack.  Obstacles will also appear in the players path.  There will be multiple enemies each with their own unique behavior.
 
-This project will utilize:
+This project utilizes:
 -   Vanilla JavaScript
+    - Uses pure JavaScript with no additional libraries.
 -   Canvas
+    - Features mulitple canvases:
+        -   Background animation loop
+        -   On-screen UI elements
+        -   Player's and enemy units
 -   CSS
+    - Simple CSS elements to display instructions as well as a music checkbox to toggle on/off the music and sound effects.
 
 # Functionality & MVP
 Players will be able to:
 -   Move around on a canvas, with restraints
 -   Initiate an attack on multiple directions (left/right)
+    
+    <img src="./dist/images/movement.gif" width="200"/>
 
 This project will include:
 -   Enemy AI
@@ -19,33 +27,17 @@ This project will include:
 -   Game Over logic
     -   The player will lose health when colliding with another object.  When the player's health reaches 0, they will get a game over.
 
-# Wireframe:
+## Enemy AI
+-   Certain enemy units will move according to the position of the player:
+    <img src="./dist/images/enemy-AI.gif" width="500"/>
+    
+-   The below code compares the player's position with the enemy's position and adjust's it for the next frame:
 
-<img src="./dist/images/wireframe.png" width="500"/>
-<img src="./dist/images/screenshot.png" width="500"/>
+    <img src="./dist/images/generateEnemy.png" width="600"/>
 
-# Implementation Timeline
-
-Day1
-- Setup all necessary files.
-- Create a backgroun canvas and setup boundaries.
-- Create units and their animations.
-
-Day2
-- Give player's unit inputs depending on key pressed
-- Get units to move around on-screen
-- Give enemy units an AI
-- Collision
-
-Day3
-- Collision cont..
-- Game over logic
-
-Day4
-- Style everything.
-- Make a title screen
-
-Day5
-- Upload to GitHub Pages.
-
-
+## Collisions & Game Over Logic
+-   When units collide on the canvas, there will be a collision, which will result in the player's health reducing.
+-   If the player's health reaches 0, they will get a Game Over.
+<img src="./dist/images/gameover.gif" width="500"/>
+-   I decided to write my own custom function to detect collisions.  In order to detect when two units are colliding, I gave each unit their own hitbox parameters( 1 for the X axis and 1 for Y axis), which includes the 2 positions; their position on the canvas, and that same position + their width/height.  Then by checking if the any two units hitboxes are within range with one another, it will tell us if there is a collision.
+<img src="./dist/images/collisions.png" width="500"/>
