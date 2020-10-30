@@ -222,12 +222,6 @@ export default class Game {
 
         // MICHAELANGELO!!!
         if (currentEnemy.type === "turtle") {
-            // if (currentEnemy.y > 650) {
-                // console.log("wowowooo")
-                // debugger
-                // this.enemies.splice(enemyNum, 1)
-                // debugger
-            // }
             switch (currentEnemy.direction) {
                 case "right":
                     this.ctx.drawImage(

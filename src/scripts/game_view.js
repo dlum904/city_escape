@@ -21,10 +21,6 @@ export default class GameView {
             if (e.key === "Enter") {
                 this.restart();
             }
-            if (e.key === "n") {
-                this.mutePage();
-            }
-
         })
         let that = this;
         const checkbox = document.querySelector(".music-checkbox");
@@ -32,15 +28,18 @@ export default class GameView {
             if(e.target.checked) {
 
                 that.game.sound = true;
-                if(this.music.paused){
-                    this.music.play();
+                if (this.music) {
+                    if(this.music.paused){
+                        this.music.play();
+                    }
                 }
 
             }
             else {
                 that.game.sound = false;
+                if (this.music) {
                     this.music.pause();
-
+                }
             }
         })
     }

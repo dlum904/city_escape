@@ -92,12 +92,12 @@ export default class Player {
             this.moving = true;
         }
         else if (this.frameX >= 2){
-            // console.log()
+
             this.frameX = 0
         }
         this.handlePlayerAttack();
     }
-//
+
     handlePlayerAttack() {
         if (this.leftAttack) {
             this.lAttackXHitBox = [this.x + 10, this.x + 60];
