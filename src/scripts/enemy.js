@@ -37,22 +37,8 @@ export default class Enemy {
                 }
         this.xHitBox = [this.x, this.x + this.hitboxWidth];
         this.yHitBox = [this.y, this.y + this.hitboxHeight];
-        // this.dying = false;
         this.frameX = 0
         this.dead = false;
     }
-
-    sayHello() {
-        console.log("Hello")
-    }
-    // handleEnemyFrame() {
-    //     debugger
-    //     if (this.type === "damaged-crazy") {
-    //         this.frameX+= 0.1
-    //     }
-    //     if (this.frameX > 4) {
-    //         this.destroy();
-    //     }
-    // }
 
 }
