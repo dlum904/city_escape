@@ -7,7 +7,8 @@ export default class Game {
         this.gameover = false;
         this.ctxUI = canvasUI.getContext("2d");
         this.ctx = canvas.getContext("2d");
-        this.ctxSplash = canvasSplash.getContext("2d")
+        this.ctxSplash = canvasSplash.getContext("2d");
+        this.sound = false;
         this.player1 = new Player();
         this.width = canvas.width;
         this.height = canvas.height;
@@ -151,21 +152,21 @@ export default class Game {
             if (Util.collision(this.player1.x + 74, this.player1.y + 16, 38, 80,
                 currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
                     this.health -= 1;
-                    this.oof.play();
+                    if (this.sound) this.oof.play();
                 this.drawUI(this.health, this.score);
                     console.log(this.health);
                 }
             if (this.player1.leftAttack) {
                 if (Util.attacked(this.player1.lAttackXHitBox, this.player1.lAttackYHitBox,
                     currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
-                        this.slice.play();
+                    if (this.sound) this.slice.play();
                         currentEnemy.type = "damaged-stupid"
                     }
             }
             if (this.player1.rightAttack) {
                 if (Util.attacked(this.player1.rAttackXHitBox, this.player1.rAttackYHitBox,
                     currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
-                        this.slice.play();
+                    if (this.sound) this.slice.play();
                         currentEnemy.type = "damaged-stupid"
                     }
             }
@@ -196,13 +197,13 @@ export default class Game {
             if (Util.collision(this.player1.x + 74, this.player1.y + 16, 38, 80,
                 currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
                     this.health -= 5;
-                this.oof.play();
+                if (this.sound) this.oof.play();
                     this.drawUI(this.health,this.score);
                 }
             if (this.player1.leftAttack) {
                 if (Util.attacked(this.player1.lAttackXHitBox, this.player1.lAttackYHitBox,
                     currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
-                        this.slice.play();
+                    if (this.sound) this.slice.play();
                         currentEnemy.type = "damaged-crazy"
                     }
             }
@@ -210,7 +211,7 @@ export default class Game {
             if (this.player1.rightAttack) {
                 if (Util.attacked(this.player1.rAttackXHitBox, this.player1.rAttackYHitBox,
                     currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
-                        this.slice.play();
+                    if (this.sound) this.slice.play();
                         currentEnemy.type = "damaged-crazy"
                     }
             }
@@ -221,12 +222,6 @@ export default class Game {
 
         // MICHAELANGELO!!!
         if (currentEnemy.type === "turtle") {
-            // if (currentEnemy.y > 650) {
-                // console.log("wowowooo")
-                // debugger
-                // this.enemies.splice(enemyNum, 1)
-                // debugger
-            // }
             switch (currentEnemy.direction) {
                 case "right":
                     this.ctx.drawImage(
@@ -283,24 +278,10 @@ export default class Game {
             if (Util.collision(this.player1.x + 74, this.player1.y + 16, 38, 80,
                 currentEnemy.x, currentEnemy.y, 50, 53)) {
                 this.health -= 10;
-                this.oof.play();
+                if (this.sound) this.oof.play();
                 this.drawUI(this.health, this.score);
             }
-            // if (this.player1.leftAttack) {
-            //     if (Util.attacked(this.player1.lAttackXHitBox, this.player1.lAttackYHitBox,
-            //         currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
-            //         this.slice.play();
-            //         // currentEnemy.type = "damaged-crazy"
-            //     }
-            // }
 
-            // if (this.player1.rightAttack) {
-            //     if (Util.attacked(this.player1.rAttackXHitBox, this.player1.rAttackYHitBox,
-            //         currentEnemy.x, currentEnemy.y, currentEnemy.hitboxWidth, currentEnemy.hitboxHeight)) {
-            //         this.slice.play();
-            //         // currentEnemy.type = "damaged-crazy"
-            //     }
-            // }
             if (currentEnemy.y > 650) { // <--THIS SHOULD WORK
            
                 this.enemies.splice(enemyNum, 1)
@@ -379,7 +360,7 @@ export default class Game {
             this.ctx.fillText("PRESS  ENTER  TO  RESTART", 200, 400)
 
             const snaake = new Audio('./src/audio/Gameover.mp3')
-            snaake.play();
+            if (this.sound) snaake.play();
         }
     }
 
