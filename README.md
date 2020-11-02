@@ -14,7 +14,7 @@ This project utilizes:
 
 # Functionality & MVP
 Players will be able to:
--   Move around on a canvas, with restraints
+-   Move a unit around on-screen
 -   Initiate an attack on multiple directions (left/right)
     
     <img src="./dist/images/movement.gif" width="200"/>
