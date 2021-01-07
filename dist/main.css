@@ -2,6 +2,14 @@ body {
     background-color: black;
 }
 
+.main {
+    position: absolute;
+    width: 100vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+    
+}
 .title-text {
     text-align: center;
     font-family: 'ARCADECLASSIC';
