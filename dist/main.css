@@ -6,12 +6,25 @@ body {
     text-align: center;
     font-family: 'ARCADECLASSIC';
     font-size: 50px;
+    margin: 10px 0px 10px 0px;
     color: white;
 }
+
+.ui-ele {
+    display: flex;
+    justify-content: space-evenly;
+    height: 650px;
+}
+
+.canvases {
+    width: 840px;
+    height: 650px;
+}
 .instructions {
-    position: absolute;
+    /* position: absolute;
     top: 20%;
-    left: 10%;
+    left: 10%; */
+    width: 200px;
     text-align: left;
     font-family: 'ARCADECLASSIC';
     font-size: 20px;
@@ -30,9 +43,10 @@ body {
     font-size: 20px;
 }
 .scores {
-    position: absolute;
+    /* position: absolute;
     top: 20%;
-    right: 10%;
+    right: 10%; */
+    width: 200px;
     text-align: left;
     font-family: 'ARCADECLASSIC';
     font-size: 20px;
@@ -45,23 +59,24 @@ body {
 text-align: center;
 font-size: 25px;
 }
+
 #canvas-game {
     width: 840px;
     height: 650px;
     border: 1px solid white;
     position: absolute;
-    top: 50%;
+    /* top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
 }
 #canvas-splash {
     width: 840px;
     height: 650px;
     border: 1px solid;
     position: absolute;
-    top: 50%;
+    /* top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
 }
 .splash {
     background-image: url("./images/background-static.jpg");
@@ -69,11 +84,20 @@ font-size: 25px;
     height: 650px;
     border: 1px solid;
     position: absolute;
-    top: 50%;
+    /* top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
 }
 
+#canvas-ui {
+    z-index: 9;
+    width: 840px;
+    height: 650px;
+    position: absolute;
+    /* top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+}
 .title {
     position: relative;
     top: 100px;
@@ -90,26 +114,14 @@ font-size: 25px;
     font-size: 50px;
 }
 
-#canvas-ui {
-    z-index: 9;
-    width: 840px;
-    height: 650px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 
 .links {
-    position: absolute;
     width: 500px;
-    bottom: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     font-family: 'ARCADECLASSIC';
     font-size: 14px;
     display: flex;
     justify-content: space-evenly;
+    margin: 20px auto auto auto;
 }
 .links a{
     text-decoration: none;

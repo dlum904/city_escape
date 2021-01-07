@@ -21,51 +21,64 @@
         <!-- <audio id="music"  loop >
           <source src="./dist/audio/bike_chase.mp3" type="audio/mpeg">
         </audio> -->
-        <section class="instructions">
-          <p>CONTROLS</p>
-          <p class="basic-control">w = up</p>
-          <p class="basic-control">a = left</p>
-          <p class="basic-control">s = down</p>
-          <p class="basic-control">d = right</p>
-          <p class="basic-control">left = left &nbsp attack</p>
-          <p class="basic-control">right = right &nbsp attack</p>
-          <div class="music-control">
-            <p>MUSIC</p>
-              <input class="music-checkbox"type="checkbox">
-              <label for="music">ON/OFF</label>
-          </div>
+
+        <section class="ui-ele">
+          <section class="instructions">
+            <p>CONTROLS</p>
+            <p class="basic-control">w = up</p>
+            <p class="basic-control">a = left</p>
+            <p class="basic-control">s = down</p>
+            <p class="basic-control">d = right</p>
+            <p class="basic-control">left = left &nbsp attack</p>
+            <p class="basic-control">right = right &nbsp attack</p>
+            <div class="music-control">
+              <p>MUSIC</p>
+                <input class="music-checkbox"type="checkbox">
+                <label for="music">ON/OFF</label>
+            </div>
+          </section>
+          
+          <section class="canvases">
+        
+            <section class="splash">
+              <!-- <img src="./dist/images/background-1.png"> -->
+              <div class="title">
+                <p>Press &nbsp Enter &nbsp to &nbsp Start</p>
+                <p>Avoid &nbsp getting &nbsp hit</p>
+                <p>Destroy &nbsp vehicles &nbsp to &nbsp get &nbsp points</p>
+                <p>Turtles &nbsp can't &nbsp be &nbsp killed..</p>
+              </div>
+            </section>
+            <canvas id="canvas-splash"></canvas>
+            <canvas id="canvas-ui"></canvas>
+            <canvas id="canvas-game"></canvas>
+  
+          </section>
+  
+          <section class="scores">
+            <p>HIGH &nbsp SCORES</p>
+            <p>1. &nbsp &nbsp Dennis &nbsp 999999</p>
+            <p>2. &nbsp &nbsp Dennis &nbsp 999998</p>
+            <p>3. &nbsp &nbsp Dennis &nbsp 999997</p>
+            <p>4. &nbsp &nbsp Dennis &nbsp 999996</p>
+            <p>5. &nbsp &nbsp Dennis &nbsp 999995</p>
+            <p>6. &nbsp &nbsp Dennis &nbsp 999994</p>
+            <p>7. &nbsp &nbsp Dennis &nbsp 999993</p>
+            <p>8. &nbsp &nbsp Dennis &nbsp 999992</p>
+            <p>9. &nbsp &nbsp Dennis &nbsp 999991</p>
+            <p>10. Dennis &nbsp 999990</p>
+          </section>
         </section>
-        <section class="scores">
-          <p>HIGH &nbsp SCORES</p>
-          <p>1. &nbsp &nbsp Dennis &nbsp 999999</p>
-          <p>2. &nbsp &nbsp Dennis &nbsp 999998</p>
-          <p>3. &nbsp &nbsp Dennis &nbsp 999997</p>
-          <p>4. &nbsp &nbsp Dennis &nbsp 999996</p>
-          <p>5. &nbsp &nbsp Dennis &nbsp 999995</p>
-          <p>6. &nbsp &nbsp Dennis &nbsp 999994</p>
-          <p>7. &nbsp &nbsp Dennis &nbsp 999993</p>
-          <p>8. &nbsp &nbsp Dennis &nbsp 999992</p>
-          <p>9. &nbsp &nbsp Dennis &nbsp 999991</p>
-          <p>10. Dennis &nbsp 999990</p>
-        </section>
-        <section class="splash">
-          <!-- <img src="./dist/images/background-1.png"> -->
-          <div class="title">
-            <p>Press &nbsp Enter &nbsp to &nbsp Start</p>
-            <p>Avoid &nbsp getting &nbsp hit</p>
-            <p>Destroy &nbsp vehicles &nbsp to &nbsp get &nbsp points</p>
-            <p>Turtles &nbsp can't &nbsp be &nbsp killed..</p>
-          </div>
-        </section>
-        <canvas id="canvas-splash"></canvas>
-        <canvas id="canvas-ui"></canvas>
-        <canvas id="canvas-game"></canvas>
+
+        
+
         <section class="links">
           <a href="https://www.linkedin.com/in/dennis-lum-12526b7a/" target="_blank">Linkedin</a>
           <a href="https://github.com/dlum904" target="_blank"> Git Hub</a>
           <a href="https://angel.co/u/dennis-lum" target="_blank"> Angel List</a>
           <a href="https://dlum904.github.io/dlum/" target="_blank"> About Me</a>
         </section>
+
     <script src="./dist/main.js">
     </script>
   </body>
