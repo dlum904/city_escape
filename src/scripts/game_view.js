@@ -53,12 +53,6 @@ export default class GameView {
         )
     }
 
-    // start() {
-    //     this.music.loop = true;
-    //     this.music.play();
-    //     this.game.startAnimating(50);
-    // }
-
     restart() {
         this.game.gameover = false;
         this.game.health = 1000;
