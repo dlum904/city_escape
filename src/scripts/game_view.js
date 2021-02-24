@@ -68,5 +68,4 @@ export default class GameView {
         }
         this.game.startAnimating(50);
     }
-
 }
