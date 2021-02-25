@@ -10,7 +10,6 @@ export default class GameView {
         this.bottomLoop = 0;
         this.background = new Image()
         this.background.src = "./src/images/background-1.png";
-        // this.sound = false;
         this.menuKeys = [];
         this.music;
         this.registerEvents();
