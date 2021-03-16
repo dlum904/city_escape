@@ -59,7 +59,7 @@ export default class GameView {
         this.game.enemies = [];
         this.game.player1.x = 329;
         this.game.player1.y = 344;
-        // this.startAnimating(45);
+        // this.startAnimating(40);
         if (typeof this.music === "undefined") this.music = new Audio("./src/audio/bike_chase.mp3")
         if(this.game.sound && this.music.paused) {
             this.music.loop = true;
