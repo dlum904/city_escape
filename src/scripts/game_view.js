@@ -44,13 +44,13 @@ export default class GameView {
     }
     
 
-    drawStaticBackground() {
-        this.ctxSplash.drawImage(
-            this.background, 0, 0,
-            this.width, this.height,
-            0, this.bottomLoop, this.width, this.height
-        )
-    }
+    // drawStaticBackground() {
+    //     this.ctxSplash.drawImage(
+    //         this.background, 0, 0,
+    //         this.width, this.height,
+    //         0, this.bottomLoop, this.width, this.height
+    //     )
+    // }
 
     restart() {
         this.game.gameover = false;
